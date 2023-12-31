@@ -25,7 +25,6 @@ const getWord = async function () {
 const circleSymbol = function (word) {
     const placeholderSymbols = []
     for (const letter of word) {
-        //console.log(letter);
         placeholderSymbols.push("⁕");
     }
     wordInProgress.innerText = placeholderSymbols.join("");
@@ -34,11 +33,9 @@ getWord();
 guessButton.addEventListener("click", function (e) { /*Event listener*/
     e.preventDefault();
     const guessedLetter = letterInput.value;
-    console.log(guessedLetter);
     letterInput.value = "";
     message.innerText = "";
     const properGuess = checksInput(guessedLetter);
-    console.log(properGuess); /*will either log out a single letter or 'undefined' */
     if (properGuess) {
         makeGuess(guessedLetter);
     }
@@ -64,7 +61,6 @@ const makeGuess = function (guessedLetter) { /*Capture the guessed letters ON TH
         message.innerText = "You have already guessed that letter. Try again.";
     } else {
         guessedLetters.push(guessedLetter);
-        console.log(guessedLetters);
         showGuessedLettersOnDOM();
         guessesRemaining(guessedLetter);
         updateWordInProgressOnDOM(guessedLetters);
@@ -83,12 +79,10 @@ const showGuessedLettersOnDOM = function () { /*Isn't passed a perameter because
 const updateWordInProgressOnDOM = function (guessedLetters) { /*replaces circles with correct letters guessed - passing the array of guessed letters*/
     const wordUpper = word.toUpperCase();
     const wordArray = wordUpper.split("");
-    console.log(wordArray);
     const revealedWord = [];
     for (const letter of wordArray) { /*I definately get the log behind this now - you take the goal word and loop through each letter to see if the guessed letters match, if they do they push the letter from the goal word, if not, they push the symbol*/
         if (guessedLetters.includes(letter)) {
             revealedWord.push(letter.toUpperCase());
-            console.log(revealedWord);
         } else {
             revealedWord.push("⁕")
         }
